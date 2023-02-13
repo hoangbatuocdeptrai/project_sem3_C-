@@ -1,0 +1,83 @@
+﻿@model IEnumerable<MyWeb.Models.Orders>
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ViewData["Title"] = "Index";
+    var totalPrice = 0;
+    @foreach (var cart in ViewBag.Cart)
+    {
+        totalPrice += (cart.Price * cart.Quantity);
+    }
+
+
+}
+
+<br />
+<div class="container">
+
+    <div class="billing_details">
+        <div class="row">
+            <div class="col-lg-8">
+                <h3>Billing Details</h3>
+                <form class="row contact_form"
+                      asp-action="Add"
+asp-controller="Orders"
+                      method="post"
+                      novalidate="novalidate">
+                    <input type="hidden" name="TotalPrice" value="@totalPrice" />
+                    <input type="hidden" name="CustomerID" value="@HttpContextAccessor.HttpContext.Session.GetInt32("LoginCustomers")" />
+                   
+                    <div class="col-md-12 form-group">
+                        <input type="text"
+                               class="form-control"
+                               name="Address"
+                               placeholder="Address" value="@ViewBag.Address" />
+                    </div>
+                   <b class="text-danger">@TempData["Address"]</b>
+            </div>
+            <div class="col-lg-4">
+                <div class="order_box">
+                    <h2>Your Order</h2>
+                    <ul class="list">
+                        <li>
+                            <a href="#">
+                                Product
+                                <span>Total</span>
+                            </a>
+                        </li>
+                        @foreach(var cart in ViewBag.Cart)
+    {
+
+                        <li>
+                            <a href="#">
+                                @cart.Name
+                                <span class="middle">x @cart.Quantity</span>
+                                <span class="last">@string.Format("{0:0,00}", @cart.Price * @cart.Quantity) </span>
+                            </a>
+                        </li>
+    }
+                      
+                    </ul>
+                    <ul class="list list_2">
+                    
+                        <li>
+                            <a href="#">
+                                Total
+                                <span>@totalPrice</span>
+                            </a>
+                        </li>
+                    </ul>
+                    
+                   
+                    <button class="main_btn">Proceed to Paypal</button>
+                </div>
+            </div>
+                </form>
+        </div>
+    </div>
+</div>
+

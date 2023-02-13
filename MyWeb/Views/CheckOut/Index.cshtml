@@ -1,0 +1,73 @@
+﻿@model MyWeb.Models.Customer
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!--================Home Banner Area =================-->
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+            <div class="banner_content d-md-flex justify-content-between align-items-center">
+                <div class="mb-3 mb-md-0">
+                    <h2>Product Checkout</h2>
+                    <p>Very us move be blessed multiply night</p>
+                </div>
+                <div class="page_link">
+                    <a href="index.html">Home</a>
+                    <a href="checkout.html">Product Checkout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Home Banner Area =================-->
+<!--================Checkout Area =================-->
+<section class="checkout_area section_gap">
+    <div class="container">
+        <div class="returning_customer">
+            <div class="check_title">
+                <h2>
+                    Returning Customer?
+                    <a href="#">Click here to login</a>
+                </h2>
+            </div>
+            <p>
+                If you have shopped with us before, please enter your details in the
+                boxes below. If you are a new customer, please proceed to the
+                Billing & Shipping section.
+            </p>
+            <p class="login-box-msg text-danger">@TempData["err"]</p>
+            <form class="row contact_form"
+                  asp-controller="CheckOut" asp-action="Index"
+                  method="post">
+                <div class="col-md-6 form-group p_star">
+                    <input type="text"
+                           class="form-control" name="userName" />
+                    <p class="login-box-msg text-danger">@TempData["userName"]</p>
+                </div>
+
+                <div class="col-md-6 form-group p_star">
+                    <input type="password"
+                           class="form-control"
+                           name="password" />
+                    <p class="login-box-msg text-danger">@TempData["password"]</p>
+                </div>
+                <div class="col-md-12 form-group">
+                    <button type="submit" value="submit" class="btn submit_btn">
+                        Send Message
+                    </button>
+                    <div class="creat_account">
+                        <input type="checkbox" id="f-option" name="selector" />
+                        <label for="f-option">Remember me</label>
+                    </div>
+                    <a class="lost_pass" href="#">Lost your password?</a>
+                </div>
+            </form>
+        </div>
+   
+       
+    </div>
+</section>
+<!--================End Checkout Area =================-->

@@ -1,0 +1,78 @@
+﻿@model X.PagedList.IPagedList<MyWeb.Models.Product>
+@using X.PagedList.Mvc.Core;
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/admin.cshtml";
+}
+<br />
+<form action="" method="get" class="form-inline">
+    <div class="form-group">
+        <label class="sr-only" for="">label</label>
+        <input class="form-control" name="name" placeholder="Nhập tên cần tìm">
+    </div>
+    <button type="submit" class="btn btn-default mr-1"><i class="fas fa-search"></i></button>
+    <a asp-action="Create" class="btn btn-primary"><i class="fas fa-plus"></i> Thêm mới</a>
+</form>
+<br />
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().SalePrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Category)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    <img src="~/images/avatar/@item.Image" width="60" />
+                </td>
+                <td>
+                    @string.Format("{0:0,00}", item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SalePrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@item.ProductID">Edit</a> |
+                    <a class="btn btn-sm btn-success" asp-action="Details" asp-route-id="@item.ProductID">Details</a> |
+                    <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.ProductID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }), new PagedListRenderOptions
+{
+    LiElementClasses = new string[] { "page-item" },
+    PageClasses = new string[] { "page-link" }
+}
+)

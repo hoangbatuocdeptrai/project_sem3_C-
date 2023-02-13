@@ -1,0 +1,66 @@
+﻿@model IEnumerable<MyWeb.Models.OrdersDetails>
+
+@{
+    ViewData["Title"] = "OrdersDetails";
+    Layout = "~/Areas/Admin/Views/Shared/admin.cshtml";
+}
+
+<h2>OrdersDetails</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CreditCardNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Createdate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Orders)
+            </th>
+          
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.ProductName)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @string.Format("{0:0,00}", item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Createdate)
+            </td>
+            <form >
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+            </form>
+            <td>
+                @Html.DisplayFor(modelItem => item.Orders.Address)
+            </td>
+           
+        </tr>
+}
+    </tbody>
+</table>

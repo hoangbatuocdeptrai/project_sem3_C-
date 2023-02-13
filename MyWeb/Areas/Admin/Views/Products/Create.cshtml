@@ -1,0 +1,63 @@
+﻿@model MyWeb.Models.Product
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/admin.cshtml";
+}
+<div class="container">
+
+    <h2>Create</h2>
+
+    <h4>Product</h4>
+    <hr />
+            <form asp-action="Create" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label asp-for="ProductName" class="control-label"></label>
+                            <input asp-for="ProductName" class="form-control" />
+                            <span asp-validation-for="ProductName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Quantity" class="control-label"></label>
+                            <input asp-for="Quantity" class="form-control" />
+                            <span asp-validation-for="Quantity" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Price" class="control-label"></label>
+                            <input asp-for="Price" class="form-control" />
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="SalePrice" class="control-label"></label>
+                            <input asp-for="SalePrice" type="number" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Create" class="btn btn-default" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="Image" class="control-label"></label>
+                            <input asp-for="Image" type="file" class="form-control" />
+                            <img id="show_thumb" src="https://thailamlandscape.vn/wp-content/uploads/2017/10/no-image.png"
+                                 style="width:200px;cursor: pointer;">
+                            <span asp-validation-for="Image" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CategoryID" class="control-label"></label>
+                            <select asp-for="CategoryID" class="form-control" asp-items="ViewBag.CategoryID"></select>
+                        </div>
+                        
+                    </div>
+                </div>
+            </form>
+    </div>
+
+
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
